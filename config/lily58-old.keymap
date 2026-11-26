@@ -1,0 +1,185 @@
+/*
+ * Copyright (c) 2020 The ZMK Contributors
+ *
+ * SPDX-License-Identifier: MIT
+ */
+
+#include <behaviors.dtsi>
+#include <dt-bindings/zmk/keys.h>
+#include <dt-bindings/zmk/bt.h>
+#include <dt-bindings/zmk/ext_power.h>
+
+/*
+ * Cygnus 4x6 on the Lily58 matrix. The halves use the Lily58 shield, its pins
+ * and its rows and columns. The Cygnus has 54 keys, the Lily58 58, so this
+ * map leaves out four Lily58 matrix spots: the two inner keys beside the
+ * bottom row (RC(4,5), RC(4,6)) and the outermost thumb on each side
+ * (RC(4,1), RC(4,10)). The three Cygnus thumbs per side use the other three
+ * Lily58 thumb spots, outer to inner on the left and inner to outer on the
+ * right. Wire the Cygnus thumbs to those spots.
+ *
+ * It replaces the map of the shield's default_transform rather than adding a
+ * new transform, so the right half keeps the shield's col-offset of 6.
+ *
+ * The map uses MX(row, col) instead of the usual RC(row, col): keys.h, included
+ * above, redefines RC() as the "right Ctrl +" key modifier, which takes one
+ * argument. MX is the same formula as RC in matrix_transform.h.
+ */
+#define MX(row, col) (((row) << 8) + (col))
+&default_transform {
+    map = <
+MX(0,0) MX(0,1) MX(0,2) MX(0,3) MX(0,4) MX(0,5)     MX(0,6) MX(0,7) MX(0,8) MX(0,9) MX(0,10) MX(0,11)
+MX(1,0) MX(1,1) MX(1,2) MX(1,3) MX(1,4) MX(1,5)     MX(1,6) MX(1,7) MX(1,8) MX(1,9) MX(1,10) MX(1,11)
+MX(2,0) MX(2,1) MX(2,2) MX(2,3) MX(2,4) MX(2,5)     MX(2,6) MX(2,7) MX(2,8) MX(2,9) MX(2,10) MX(2,11)
+MX(3,0) MX(3,1) MX(3,2) MX(3,3) MX(3,4) MX(3,5)     MX(3,6) MX(3,7) MX(3,8) MX(3,9) MX(3,10) MX(3,11)
+                        MX(4,2) MX(4,3) MX(4,4)     MX(4,7) MX(4,8) MX(4,9)
+    >;
+};
+
+/*
+ * Cygnus 4x6 physical layout, for ZMK Studio. Same positions as
+ * config/info.json (the Keymap Editor's copy), in hundredths of a key.
+ */
+/ {
+    chosen {
+        zmk,physical-layout = &cygnus_layout;
+    };
+
+    cygnus_layout: cygnus_layout {
+        compatible = "zmk,physical-layout";
+        display-name = "Cygnus 4x6";
+        transform = <&default_transform>;
+
+        keys  //                     w   h     x     y      rot    rx    ry
+            = <&key_physical_attrs 100 100     0    38        0     0     0>
+            , <&key_physical_attrs 100 100   100    38        0     0     0>
+            , <&key_physical_attrs 100 100   200    12        0     0     0>
+            , <&key_physical_attrs 100 100   300     0        0     0     0>
+            , <&key_physical_attrs 100 100   400    12        0     0     0>
+            , <&key_physical_attrs 100 100   500    25        0     0     0>
+            , <&key_physical_attrs 100 100   900    25        0     0     0>
+            , <&key_physical_attrs 100 100  1000    12        0     0     0>
+            , <&key_physical_attrs 100 100  1100     0        0     0     0>
+            , <&key_physical_attrs 100 100  1200    12        0     0     0>
+            , <&key_physical_attrs 100 100  1300    38        0     0     0>
+            , <&key_physical_attrs 100 100  1400    38        0     0     0>
+            , <&key_physical_attrs 100 100     0   138        0     0     0>
+            , <&key_physical_attrs 100 100   100   138        0     0     0>
+            , <&key_physical_attrs 100 100   200   112        0     0     0>
+            , <&key_physical_attrs 100 100   300   100        0     0     0>
+            , <&key_physical_attrs 100 100   400   112        0     0     0>
+            , <&key_physical_attrs 100 100   500   125        0     0     0>
+            , <&key_physical_attrs 100 100   900   125        0     0     0>
+            , <&key_physical_attrs 100 100  1000   112        0     0     0>
+            , <&key_physical_attrs 100 100  1100   100        0     0     0>
+            , <&key_physical_attrs 100 100  1200   112        0     0     0>
+            , <&key_physical_attrs 100 100  1300   138        0     0     0>
+            , <&key_physical_attrs 100 100  1400   138        0     0     0>
+            , <&key_physical_attrs 100 100     0   238        0     0     0>
+            , <&key_physical_attrs 100 100   100   238        0     0     0>
+            , <&key_physical_attrs 100 100   200   212        0     0     0>
+            , <&key_physical_attrs 100 100   300   200        0     0     0>
+            , <&key_physical_attrs 100 100   400   212        0     0     0>
+            , <&key_physical_attrs 100 100   500   225        0     0     0>
+            , <&key_physical_attrs 100 100   900   225        0     0     0>
+            , <&key_physical_attrs 100 100  1000   212        0     0     0>
+            , <&key_physical_attrs 100 100  1100   200        0     0     0>
+            , <&key_physical_attrs 100 100  1200   212        0     0     0>
+            , <&key_physical_attrs 100 100  1300   238        0     0     0>
+            , <&key_physical_attrs 100 100  1400   238        0     0     0>
+            , <&key_physical_attrs 100 100     0   338        0     0     0>
+            , <&key_physical_attrs 100 100   100   338        0     0     0>
+            , <&key_physical_attrs 100 100   200   312        0     0     0>
+            , <&key_physical_attrs 100 100   300   300        0     0     0>
+            , <&key_physical_attrs 100 100   400   312        0     0     0>
+            , <&key_physical_attrs 100 100   500   325        0     0     0>
+            , <&key_physical_attrs 100 100   900   325        0     0     0>
+            , <&key_physical_attrs 100 100  1000   312        0     0     0>
+            , <&key_physical_attrs 100 100  1100   300        0     0     0>
+            , <&key_physical_attrs 100 100  1200   312        0     0     0>
+            , <&key_physical_attrs 100 100  1300   338        0     0     0>
+            , <&key_physical_attrs 100 100  1400   338        0     0     0>
+            , <&key_physical_attrs 100 100   390   412     3000   390   412>
+            , <&key_physical_attrs 100 100   310   440     3000   398   790>
+            , <&key_physical_attrs 100 150   415   390     3000   398   790>
+            , <&key_physical_attrs 100 150   985   390  (-3000)  1102   790>
+            , <&key_physical_attrs 100 100  1090   440  (-3000)  1102   790>
+            , <&key_physical_attrs 100 100  1010   412  (-3000)  1110   412>
+            ;
+    };
+};
+
+/* Drop the stock Lily58 drawing: it has 58 keys and no longer matches. */
+/delete-node/ &kata0510_lily58_layout;
+
+/ {
+    combos {
+        compatible = "zmk,combos";
+
+        combo_clear_bluetooth {
+            timeout-ms = <50>; // Press all the below keys within 50ms to activate mapping
+            key-positions = <49 12 0>; // 49=LOWER, 12=TAB, 0=GRAVE
+            bindings = <&bt BT_CLR>; // clear the pairing of the current Bluetooth profile
+        };
+    };
+
+    keymap {
+        compatible = "zmk,keymap";
+
+        default_layer {
+            // -------------------------------------------------------------------------------------
+            // |   `      |  1  |  2  |  3   |  4   |  5   |   |  6   |  7    |  8    |  9   |   0   |   -   |
+            // |  TAB     |  Q  |  W  |  E   |  R   |  T   |   |  Y   |  U    |  I    |  O   |   P   |   =   |
+            // |hCTRL tESC|  A  |  S  |  D   |  F   |  G   |   |  H   |  J    |  K    |  L   |   ;   |   '   |
+            // | SHIFT    |  Z  |  X  |  C   |  V   |  B   |   |  N   |  M    |  ,    |  .   |   /   | SHIFT |
+            //                        | GUI  | LOWER| SPACE|   | BSPC | ENTER | RAISE |
+
+            bindings = <
+      &kp GRAVE  &kp N1  &kp N2    &kp N3     &kp N4    &kp N5       &kp N6    &kp N7     &kp N8    &kp N9    &kp N0    &kp MINUS
+      &kp TAB    &kp Q   &kp W     &kp E      &kp R     &kp T        &kp Y     &kp U      &kp I     &kp O     &kp P     &kp EQUAL
+&mt LCTRL ESC    &kp A   &kp S     &kp D      &kp F     &kp G        &kp H     &kp J      &kp K     &kp L     &kp SEMI  &kp SQT
+    &kp LSHFT    &kp Z   &kp X     &kp C      &kp V     &kp B        &kp N     &kp M      &kp COMMA &kp DOT   &kp FSLH  &kp RSHFT
+                                   &kp LMETA  &mo 2     &kp SPACE    &kp BSPC  &kp RET    &mo 1
+            >;
+
+            sensor-bindings = <&inc_dec_kp C_VOL_UP C_VOL_DN>;
+        };
+
+        raise_layer {
+            // -------------------------------------------------------------------------------------
+            // |  F12    |  F1 |  F2 |  F3  |  F4  |  F5  |   |  F6  |   F7  |   F8  |  F9  |  F10  |  F11  |
+            // |   `     |  1  |  2  |  3   |  4   |  5   |   |  6   |   7   |   8   |  9   |   0   |   -   |
+            // |CTRL/ESC |     |     |      |      |      |   |  <-  |   v   |   ^   |  ->  |       |       |
+            // | SHIFT   |     |     |      |      |      |   |  +   |   -   |   =   |  [   |   ]   |   \   |
+            //                       |      |      |      |   |      |       |       |
+
+            bindings = <
+      &kp F12  &kp F1  &kp F2  &kp F3  &kp F4  &kp F5      &kp F6       &kp F7     &kp F8     &kp F9    &kp F10   &kp F11
+    &kp GRAVE  &kp N1  &kp N2  &kp N3  &kp N4  &kp N5      &kp N6       &kp N7     &kp N8     &kp N9    &kp N0    &kp MINUS
+&mt LCTRL ESC  &trans  &trans  &trans  &trans  &trans      &kp LEFT     &kp DOWN   &kp UP     &kp RIGHT &trans    &trans
+   &kp LSHIFT  &trans  &trans  &trans  &trans  &trans      &kp KP_PLUS  &kp MINUS  &kp EQUAL  &kp LBKT  &kp RBKT  &kp RIGHT_SHIFT
+                               &trans  &trans  &trans      &trans       &trans     &trans
+            >;
+
+            sensor-bindings = <&inc_dec_kp C_VOL_UP C_VOL_DN>;
+        };
+
+        lower_layer {
+            // -------------------------------------------------------------------------------------
+            // |          | BT1     | BT2    |  BT3 |  BT4  |  BT5 |   |      |       |       |      |       |STUDIO |
+            // |          |         |        |      |       |      |   |      |       |       |  [   |   ]   |   \   |
+            // |   ~      |  !      |  @     |  #   |  $    |  %   |   |  ^   |  &    |  *    |  (   |   )   |   _   |
+            // | SHIFT    |         |        |      |  (    |  {   |   |  }   |  )    |  +    |  {   |   }   | SHIFT |
+            //                               |      |       |      |   | DEL  |       |       |
+            bindings = <
+    &trans       &bt BT_SEL 0  &bt BT_SEL 1  &bt BT_SEL 2  &bt BT_SEL 3  &bt BT_SEL 4      &trans     &trans      &trans          &trans     &trans    &studio_unlock
+    &trans       &trans        &trans        &trans        &trans        &trans            &trans     &trans      &trans          &kp LBKT   &kp RBKT  &kp BSLH
+    &kp TILDE    &kp EXCL      &kp AT        &kp HASH      &kp DOLLAR    &kp PRCNT         &kp CARET  &kp AMPS    &kp KP_MULTIPLY &kp LPAR   &kp RPAR  &kp UNDER
+    &kp LSHIFT   &trans        &trans        &kp LPAR      &kp LBRC      &trans            &kp RBRC   &kp RPAR    &kp KP_PLUS     &kp LBRC   &kp RBRC  &kp RSHFT
+                                             &trans        &trans        &trans            &kp DEL    &trans      &trans
+            >;
+
+            sensor-bindings = <&inc_dec_kp C_VOL_UP C_VOL_DN>;
+        };
+    };
+};
